@@ -9,4 +9,5 @@ adb shell rm /sdcard/screen.png
 
 ::    How to execute:
 ::    In a Windows cmd or Powershell, navigate to the right folder and
-::    adbscreen.bat IP
+::    adb connect IP
+::    adbscreen.bat NUMBER
