@@ -10,7 +10,6 @@ endif
 call plug#begin('~/.vim/plugged')
 " Tools
         Plug 'airblade/vim-gitgutter'
-        Plug 'vifm/vifm.vim'
 "Syntax
         Plug 'tpope/vim-markdown'
 "Color-Schemes
@@ -46,8 +45,6 @@ set statusline+=\ %p%%
 set statusline+=\ [%n]
 
 " ----- KEY MAPPING -----
-
-map <C-n> :EditVifm .<CR>
 
 nnoremap Q <nop>
 
