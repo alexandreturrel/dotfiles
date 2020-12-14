@@ -43,17 +43,21 @@ set statusline+=\ [%n]
 
 " ----- KEY MAPPING -----
 
-" map <C-n> :EditVifm .<CR>
+" map <C-n> :EditVifm .<CR>    "TODO: not used anymore
 
 nnoremap Q <nop>
 
+" navigating between splits
 nnoremap <C-h> <C-W>h
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
 " ------ MACROS -----
-nnoremap ;json :%!python -m json.tool<CR>
+nnoremap !json V:!python -m json.tool<CR>
+nnoremap !bash ggi#!/bin/bash<CR><CR><Esc>
+nnoremap !python ggi#!/usr/lib/python2.7<CR><CR><Esc>
+nnoremap !rel :set rnu!<CR>
 
 " ----- VIM CHEAT SHEET -----
 " moving up and down one line: j, k
