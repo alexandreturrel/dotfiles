@@ -52,9 +52,8 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
-xnoremap K :move '<-2<CR>gv-gv
-xnoremap J :move '>+1<CR>gv-gv
-
+" ------ MACROS -----
+nnoremap ;json :%!python -m json.tool<CR>
 
 " ----- VIM CHEAT SHEET -----
 " moving up and down one line: j, k
@@ -110,3 +109,9 @@ xnoremap J :move '>+1<CR>gv-gv
 " add surroundings around selection: ys[selection][surroundings]
 " change current surroundings with new ones: cs[current][new]
 " delete current surroundings: ds[current]
+" 
+" ===============
+" JSON PRETTYFIER
+" ===============
+" structure json file to be readable: :%!python -m json.tool or ;json
+" 
