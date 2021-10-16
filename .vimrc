@@ -6,7 +6,10 @@ call plug#begin('~/.vim/plugged')
         Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-commentary'
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
 "Syntax
+        Plug 'christoomey/vim-titlecase'
         Plug 'tpope/vim-markdown'
 "Color-Schemes
         Plug 'morhetz/gruvbox'
@@ -26,10 +29,19 @@ set noruler
 set confirm
 set autoindent
 set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set hls is
 set ic
 " set cursorline
 set showcmd
+
+set listchars=tab:▸\ ,eol:¬
+
+"Invisible character colors 
+" highlight NonText guifg=#4a4a59
+" highlight SpecialKey guifg=#4a4a59
 
 set laststatus=2
 set statusline=
@@ -46,24 +58,40 @@ set statusline+=\ [%n]
 " ctags config
 command! MakeTags !ctags -R .
 
+" generic commands that can be useful
+command! Config execute ":e $MYVIMRC"
+command! Reload execute "source $MYVIMRC"
+
 " navigation (check | netrw-browse-maps |)
 let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_altv=1
 let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
-" disable relative numbers to non focus panes
-augroup numbertoggle
-        autocmd!
-        autocmd BufEnter,FocusGained,InsertLeave * set rnu
-        autocmd BufLeave,FocusLost,InsertEnter *nornu
-augroup END
+if has("autocmd")
+	" Enable Relative Numbers Only in Normal Mode
+	augroup numbertoggle
+		autocmd!
+		autocmd BufEnter,FocusGained,InsertLeave * set rnu
+		autocmd BufLeave,FocusLost,InsertEnter * set nornu
+	augroup END
+	" force tabs to white spaces in yaml files
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+endif
 
 " ----- KEY MAPPING -----
 
+let mapleader = ","
 nnoremap Q <nop>
+imap jj <Esc>
+
+" Bind to a fzf-powered command search
+nmap cc :Commands!<CR>
+nmap // :BLines!<CR>
+nmap ?? :Rg!<CR>
+
 
 " navigating between splits
 nnoremap <C-h> <C-W>h
@@ -73,10 +101,15 @@ nnoremap <C-l> <C-W>l
 
 " ----- MACROS -----
 
-nnoremap !json V:!python -m json.tool<CR>
-nnoremap !bash ggi#!/bin/bash<CR><CR><Esc>
-nnoremap !python ggi#!/usr/lib/python2.7<CR><CR><Esc>
-nnoremap !rel :set rnu!<CR>
+nnoremap <leader>json V:!python -m json.tool<CR>
+nnoremap <leader>bash ggi#!/bin/bash<CR><CR><Esc>
+nnoremap <leader>python ggi#!/usr/lib/python2.7<CR><CR><Esc>
+nnoremap <leader>rel :set rnu!<CR>
+nnoremap <leader>nn :set rnu!<CR>:set nu!<CR>
+nnoremap <leader>html :-1read /home/turrel/.vim/templates/html.html<CR>7jwf>a
+nnoremap <leader>aa I# <Esc>lgUl
+nnoremap <leader>ab I## <Esc>lgUl
+
 
 " ----- COLORSCHEME -----
 " colorscheme gruvbox
@@ -114,6 +147,10 @@ nnoremap !rel :set rnu!<CR>
 " finding the next occurence of a character: f, t
 " (f includes it in the selection, t does not)
 
+" auto indent: ={motion}
+" indent (normal mode): >>{motion} or <<{motion}
+" in visual mode, only one > or < is needed
+
 " repeat last edit: .
 " undo last edit: u
 
@@ -142,3 +179,10 @@ nnoremap !rel :set rnu!<CR>
 " ===============
 " structure json file to be readable: :%!python -m json.tool or ;json
 
+" =============
+" Titlecase.vim
+" =============
+" custom mapping has been made in the
+" ~/.vim/plugged/vim-titlecase/plugin/titlecase.vim
+" default mapping are: nmap gt, vmap gt and nmap gT
+" new mapping is <leader>t, <leader>t and <leader>T
