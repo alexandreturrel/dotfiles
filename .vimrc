@@ -8,6 +8,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+" Wiki
+        Plug 'vimwiki/vimwiki'
 " Tools
         Plug 'airblade/vim-gitgutter'
         Plug 'tpope/vim-surround'
@@ -23,10 +25,12 @@ call plug#end()
 
 " ----- SETTINGS ----
 
+"DO NOT REMOVE, needed for vimwiki
 set nocompatible
-set encoding=UTF-8
 filetype plugin indent on
 syntax on
+"
+set encoding=UTF-8
 set number
 set relativenumber
 set autoread
@@ -92,6 +96,7 @@ endif
 let mapleader = ","
 nnoremap Q <nop>
 imap jj <Esc>
+imap kk <Esc>
 
 " Bind to a fzf-powered command search
 nmap cc :Commands!<CR>
@@ -105,8 +110,10 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
-" ----- MACROS -----
+" Navigating into Netrw
+nnoremap <leader>ee :Lexplore<CR>
 
+" ----- MACROS -----
 nnoremap <leader>json V:!python -m json.tool<CR>
 nnoremap <leader>bash ggi#!/bin/bash<CR><CR><Esc>
 nnoremap <leader>python ggi#!/usr/lib/python2.7<CR><CR><Esc>
@@ -141,6 +148,7 @@ nnoremap <leader>ab I## <Esc>lgUl
 " move to the 10% of the file: 10%
 
 " search all occurencies of the current word: *
+" search and replace in the current document: :%s/old/new/g
 
 " delete to the end of line: D
 " change to the end of line: C
@@ -192,3 +200,10 @@ nnoremap <leader>ab I## <Esc>lgUl
 " ~/.vim/plugged/vim-titlecase/plugin/titlecase.vim
 " default mapping are: nmap gt, vmap gt and nmap gT
 " new mapping is <leader>t, <leader>t and <leader>T
+
+" =============
+" Vimwiki.vim
+" =============
+" :h vimwiki-mappings to see default keybindings
+" <Leader>ww to open wiki index
+" https://github.com/vimwiki/vimwiki
