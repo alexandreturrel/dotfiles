@@ -207,3 +207,4 @@ nnoremap <leader>ab I## <Esc>lgUl
 " :h vimwiki-mappings to see default keybindings
 " <Leader>ww to open wiki index
 " https://github.com/vimwiki/vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': 'md'}]
